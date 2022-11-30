@@ -13,8 +13,13 @@
 - After insturctions are excuted our address must be incremented by 4 bytes
 - We increment by 4 bytes because 4 bytes = 32 bits which is the length of each instruction
 
-# Register_File
+### Register_File
 - This file will get the data from the registers in the MIPS instruction
 - The file will be able to locate the register data from the 5-bit address in the MIPS instruction
 - It will output two pieces of data which will be 32-bit values
 - In addition, this file will also be able to write data to a specified register
+
+### Sign_Extension 
+- For operations such as sw and lw the offset is 16 bits
+- We need to sign extend this offset by another 16 bits to make it a total 32 bits
+- We make it 32 bits by sign extension because our MIPS processor is for 32 bits
