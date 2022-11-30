@@ -12,17 +12,21 @@ module Register_File(
 
 input clk;
 input rst_n;
+// 5 bit address of registers
 input [4:0] read_addr1;
 input [4:0] read_addr2;
 input write_en;
+// 5 bit write address of register
 input [4:0] write_addr;
+// 32 bit write data we want to store to register
 input [31:0] write_data;
-
+// 32 bit data from the we read from 
 output wire [31:0] read_data1;
 output wire [31:0] read_data2;
 
 reg [31:0] reg_mem [31:0];
 
+// Read data from our register memory file
 initial begin
 $readmemh("reg_memory.mem", reg_mem); //Load initial values
 end
