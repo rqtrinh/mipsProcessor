@@ -23,3 +23,8 @@
 - For operations such as sw and lw the offset is 16 bits
 - We need to sign extend this offset by another 16 bits to make it a total 32 bits
 - We make it 32 bits by sign extension because our MIPS processor is for 32 bits
+
+## Shifter 
+- We need the shifter for the beq instruction
+- In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
+- In order to get to the next address we must add 4, this is achieved by shifting our offset value 2 bits to the left
