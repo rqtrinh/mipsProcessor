@@ -10,7 +10,9 @@
 - Operations such as lw, sw, beq are built upon the basic operations add, sub
 - It will preform operations based on the input values and yield a result value
 - This is the table we will be using for alu control 
+
 ![Alu_Table](https://user-images.githubusercontent.com/89550444/205405300-e1b5a995-f3e8-451f-8a69-d862b99bd32c.jpeg)
+
 
 #### Alu_Control
 - Values are in hex
