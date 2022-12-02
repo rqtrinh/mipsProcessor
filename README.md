@@ -10,7 +10,7 @@
 - Operations such as lw, sw, beq are built upon the basic operations add, sub
 - It will preform operations based on the input values and yield a result value
 
-### Alu_Control
+## Alu_Control
 - Values are in hex
 - This module takes inputs opocode(6 bits) and func_field(6 bits) 
 - It outputs alu_control(3 bits)
@@ -22,16 +22,56 @@
     - 3 = OR
     - 4 = NOR
     - 5 = Less than
+- It initializes func_code(3 bits)
 - First it looks at function function field
   - If func_field = ADD, SUB, AND, OR, NOR, SLT
   - func_code = (0-5 matching the corresponding operation, it is 3 bits)
   - Otherwise func_code = 0 as default
 - Now it looks at opocode 
-  - If opocode = 00, then alu_control = func_code
+  - If opocode = 00, then alu_control = func_code 
   - If opocode = 04, then alu_control = 1 (Subtraction)
   - If opocode = 23 or 2B, then alu control  = 0 (Addition)
-  - Otherwise alu_control = 0 as default
+  - Otherwise alu_control = 0 as default (Addition)
 - Output alu_control(3 bits)
+
+## Alu_Core
+- Now that we have the value of alu_control we know what operation to do 
+- This module takes inputs A(32 bits), B(32 bits), alu_control(3 bits)
+  - A is a 32 bit value
+  - B is a 32 bit value
+  - alu_control (0-5) tells this module what exact operation to do
+- The module intitalizes result which is the result of the operation done on A and B (32 bits)
+- It looks at alu_control
+  - If alu_control = 0, preform A+B
+    - If alu_control = 0, result = A+B (Addition)
+    - If alu_control = 1, result = A-B (Subtraction)
+    - If alu_control = 2, result = A&B (AND
+    - If alu_control = 3, result = A|B (OR)
+    - If alu_control = 4, result = ~(A|B) (NOR)
+    - If alu_control = 5, result = (A<B) (Less than
+    - Default, result A+B (Addition)
+- The module output result(32 bits)
+- The module will also output zero(1 bit)
+  - zero = !(|result)
+  
+## Alu_Top 
+- The Alu_Top module ties together Alu_Control and Alu_Core
+- It has 4 inputs
+  - opocode (5 bit)
+  - func_field (5 bit)
+  - A (32 bit value)
+  - B (32 bit value)
+- It has two ouputs
+  - Result(32 bit)
+  - Zero(1 bit)
+- It initializes alu_control(3 bits)
+- First it calls Alu_Control with inputs opocode(5 bits), func_field(5 bit)
+  - alu_control(3 bits) is outputed from this module with a value of (0-5)
+- The module then calls Alu_Core with inputs A(32 bit value), B(32 bit value), alu_control(3 bits)
+  - It outputs the result(32 bits) of the operation(determined by alu_control) done on A and B
+  - It also outputs zero 
+    - zero = !(|result)
+  
 
 ### Instruction_Memory
 - This code is meant to load/store the instruction at an address
