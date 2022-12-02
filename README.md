@@ -9,16 +9,24 @@
 ### Alu_Control
 - This module takes inputs opocode(6 bits) and func_field(6 bits) 
 - It outputs alu_control(3 bits)
-- func_code(3 bits) is initialized
-- It looks at the func_field if this values matches 20,22,24,25,27,2A
-  - func_code = corresponding ALU control(0,1,2,3,4,5)
-  - other values we do not care
- - It now looks at opocode 
-  - If this values matches 00, alu_control = func_code
-  - If this value matches 04, alu_control = 1 (hex)
-  - If this value matches 23, alu_control = 0 (hex)
-  - If this value matches 2B, alu_control = 0 (hex)
-- It outputs alu_control (number from 0-5)
+- Essentially this module take the opocode and function field of the mips instruction and determines what operation should be preformed
+  - alu_control represents what operation should be done
+    - 0 = Addition
+    - 1 = Subtraction
+    - 2 = AND
+    - 3 = OR
+    - 4 = NOR
+    - 5 = Less than
+- First it looks at function function field
+  - If func_field = ADD, SUB, AND, OR, NOR, SLT
+  - func_code = (0-5 matching the corresponding operation, it is 3 bits)
+  - Otherwise func_code = 0 as default
+- Now it looks at opocode 
+  - If opocode = 00, then alu_control = func_code
+  - If opocode = 04, then alu_control = 1 (Subtraction)
+  - If opocode = 23 or 2B, then alu control  = 0 (Addition)
+  - Otherwise alu_control = 3'h0 as default
+- Output alu_control(3 bits)
 
 ### Instruction_Memory
 - This code is meant to load/store the instruction at an address
