@@ -9,8 +9,10 @@
 - Our ALU can preform the operations add, sub, and, or, nor
 - Operations such as lw, sw, beq are built upon the basic operations add, sub
 - It will preform operations based on the input values and yield a result value
+- This is the table we will be using for alu control 
+![Alu_Table](https://user-images.githubusercontent.com/89550444/205405300-e1b5a995-f3e8-451f-8a69-d862b99bd32c.jpeg)
 
-## Alu_Control
+#### Alu_Control
 - Values are in hex
 - This module takes inputs opocode(6 bits) and func_field(6 bits) 
 - It outputs alu_control(3 bits)
@@ -34,7 +36,7 @@
   - Otherwise alu_control = 0 as default (Addition)
 - Output alu_control(3 bits)
 
-## Alu_Core
+#### Alu_Core
 - Now that we have the value of alu_control we know what operation to do 
 - This module takes inputs A(32 bits), B(32 bits), alu_control(3 bits)
   - A is a 32 bit value
@@ -54,7 +56,7 @@
 - The module will also output zero(1 bit)
   - zero = !(|result)
   
-## Alu_Top 
+#### Alu_Top 
 - The Alu_Top module ties together Alu_Control and Alu_Core
 - It has 4 inputs
   - opocode (5 bit)
