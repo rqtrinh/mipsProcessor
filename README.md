@@ -1,4 +1,9 @@
 # Mips Processor
+### General Details
+![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
+- We implemented the Zybooks implementation of a single cylce MIPS Processor
+- When implementing the code we represented values in hex
+
 ### ALU
 - The ALU is essential to the implementation of the MIPS processesor 
 - We implemented a 32 bit ALU that can handle R, I, and J type instructions
@@ -7,8 +12,8 @@
 - It will preform operations based on the input values and yield a result value
 
 ### Alu_Control
-- This module takes inputs opocode(6 bits) and func_field(6 bits) 
-- It outputs alu_control(3 bits)
+- This module takes inputs opocode(6 bits, hex) and func_field(6 bits, hex) 
+- It outputs alu_control(3 bits, hex)
 - Essentially this module take the opocode and function field of the mips instruction and determines what operation should be preformed
   - alu_control represents what operation should be done
     - 0 = Addition
@@ -19,13 +24,13 @@
     - 5 = Less than
 - First it looks at function function field
   - If func_field = ADD, SUB, AND, OR, NOR, SLT
-  - func_code = (0-5 matching the corresponding operation, it is 3 bits)
+  - func_code = (0-5 matching the corresponding operation, it is 3 bits represent in hex)
   - Otherwise func_code = 0 as default
 - Now it looks at opocode 
   - If opocode = 00, then alu_control = func_code
   - If opocode = 04, then alu_control = 1 (Subtraction)
   - If opocode = 23 or 2B, then alu control  = 0 (Addition)
-  - Otherwise alu_control = 3'h0 as default
+  - Otherwise alu_control = 0 as default
 - Output alu_control(3 bits)
 
 ### Instruction_Memory
