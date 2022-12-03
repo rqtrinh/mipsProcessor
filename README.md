@@ -1,9 +1,9 @@
 # Mips Processor
-### General Details
+## General Details
 ![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
 
-### ALU
+## ALU
 - The ALU is essential to the implementation of the MIPS processesor 
 - We implemented a 32 bit ALU that can handle R, I, and J type instructions
 - Our ALU can preform the operations add, sub, and, or, nor
@@ -78,7 +78,13 @@
   
 
 ### Instruction_Memory
-- This code is meant to load/store the instruction at an address
+- This module takes in a instrn_address(32 bit) as input
+- It outputs a instrn(32 bits)
+- The module loads the values from "instrn_memoery.mem" and assigns it to instrn_mem
+  - instrn_mem is 8 instructions of 32 bit length
+- It then assigns instrn a 32 bit instrn
+  - It uses instr_address to find the exact location one 32 bit instruction in instrn_mem
+- It then returns instrn (32 bit MIPS instruction)
 
 ### Program_Counter
 - After insturctions are excuted our address must be incremented by 4 bytes
