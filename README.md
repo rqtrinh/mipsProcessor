@@ -40,6 +40,7 @@
 
 #### Alu_Core
 - Now that we have the value of alu_control we know what operation to do 
+- This module will preform an operation on two values (A and B)
 - This module takes inputs A(32 bits), B(32 bits), alu_control(3 bits)
   - A is a 32 bit value
   - B is a 32 bit value
@@ -60,6 +61,7 @@
   
 #### Alu_Top 
 - The Alu_Top module ties together Alu_Control and Alu_Core
+- It calls Alu_Control get the output and calls Alu_Core with this output
 - It has 4 inputs
   - opocode (5 bit)
   - func_field (5 bit)
@@ -87,8 +89,19 @@
 - It then returns instrn (32 bit MIPS instruction)
 
 ### Program_Counter
-- After insturctions are excuted our address must be incremented by 4 bytes
-- We increment by 4 bytes because 4 bytes = 32 bits which is the length of each instruction
+- This module will store the address of the current MIPS instruction
+- This module takes clk(1 bit), rst_n(1 bit), in_address(32 bits) as input
+  - When clk goes from 0 to 1 or rst_n goes from 1 to 0
+    - if(!restn)
+      - out_address <= 32'd0
+    - else 
+      - out_address <= in_address
+- Output out_address(32 bits)
+- We are implementing a 32 Bit Mips Single Processor
+  - Each instruction is 32 bits = 4 bytes
+  - After each instruction we need to increment by 4 to get the next instruction
+    - This happens every clock cycle (D Flip Flop)
+- There will be an adder module which will increment the address by 4 and be connected to this module
 
 ### Register_File
 - This file will get the data from the registers in the MIPS instruction
