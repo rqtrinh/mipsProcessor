@@ -91,8 +91,8 @@
 ### Program_Counter
 - This module will store the address of the current MIPS instruction
 - This module takes clk(1 bit), rst_n(1 bit), in_address(32 bits) as input
-  - When clk goes from 0 to 1 or rst_n goes from 1 to 0
-    - if(!restn)
+  - When clk goes from 0 to 1 or rst_n goes from 1 to 0 (d flip flop)
+    - if(!rst_n)
       - out_address <= 32'd0
     - else 
       - out_address <= in_address
@@ -104,11 +104,52 @@
 - There will be an adder module which will increment the address by 4 and be connected to this module
 
 ### Register_File
-- This file will get the data from the registers in the MIPS instruction
-- The file will be able to locate the register data from the 5-bit address in the MIPS instruction
-- It will output two pieces of data which will be 32-bit values
-- In addition, this file will also be able to write data to a specified register
+- This module has two capabilities
+  - It can load data from two registers
+  - It can write data to one register
+- This is to support R-Type Instructions 
+  - Load data from two registers 
+  - Preform operation
+  - Write data to a register
+- Read data will appear after clock cycle
+- This module has 7 inputs 
+  - clk(1 bit), rst_n(1 bit)
+    - stimulate d flip flop
+  - read_addr1(5 bits), read_addr2(5 bits)
+    - address of the two registers we want data from
+  - write_en(1 bit)
+    - determine if we want to write data to a register
+  - write_addr(5 bits)
+    - the address of the register we want to write data to
+  - write_data(32 bits)
+    - the data we are writing to a register
+- Firstly this register will load all the register data
+  - Read all register data from "reg_memory.mem" into reg_mem
+  - reg_mem will hold the register data of 32 registers of 32 bits of data each
+    - This is because there are 32 registers in MIPS
+    - Each register is 32 bits becasue we are implementing MIPS for 32 bits
+- The module is able to read the data from two registers by using reg_mem, read_addr1, read_addr1
+#### Reading from registers
+  - read_data1 (register 1, 32 bits of data) = reg_mem[read_addr1]
+    - read_addr1 has the address of the register data in reg_mem
+  - read_data2 (register 2, 32 bits of data) = reg_mem[read_addr2]
+    - read_addr2 has the address of the register data in reg_mem
+ - Output will be read_data1 and read_data2 (32 bits of data from respective registers)
+ #### Writing to Register
+ - In addition when clk goes from 0 to 1 or rst_n goes from 1 to 0 (d flip flop)
+   - if(!rst_n)
+      - reg_mem[write_addr] <= reg_mem[write_addr]
+      - don't change the data in reg_mem
+   - else 
+      - if write_en true 
+        - reg_mem[write_addr] <= write_data(32 bits)
+        - write data to specified register 
+      - else 
+        - reg_mem[write_addr] <= reg_mem[write_addr]
+        - don't change the data in reg_mem
 
+ 
+ 
 ### Sign_Extension 
 - For operations such as sw and lw the offset is 16 bits
 - We need to sign extend this offset by another 16 bits to make it a total 32 bits
