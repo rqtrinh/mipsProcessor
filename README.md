@@ -123,7 +123,7 @@
     - the address of the register we want to write data to
   - write_data(32 bits)
     - the data we are writing to a register
-- Firstly this register will load all the register data
+#### Load the data of all registers
   - Read all register data from "reg_memory.mem" into reg_mem
   - reg_mem will hold the register data of 32 registers of 32 bits of data each
     - This is because there are 32 registers in MIPS
@@ -148,14 +148,19 @@
         - reg_mem[write_addr] <= reg_mem[write_addr]
         - don't change the data in reg_mem
 
- 
- 
 ### Sign_Extension 
 - For operations such as sw and lw the offset is 16 bits
 - We need to sign extend this offset by another 16 bits to make it a total 32 bits
 - We make it 32 bits by sign extension because our MIPS processor is for 32 bits
+- This module takes bits16_in(16 bits) as the input
+- It sign extends bits16_in by 16 bits 
+  - bits32_out(32 bits) = {{16{bits16_in[15]}} , bits16_in[15:0]};
+  - take the sign bit (most significant bit) from bits16_in
+  - fill the upper 16 bits with the sign bit number
+- Output bits32_out (sign extended bits16_in)
 
 ## Shifter 
 - We need the shifter for the beq instruction
 - In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
 - In order to get to the next address we must add 4, this is achieved by shifting our offset value 2 bits to the left
+
