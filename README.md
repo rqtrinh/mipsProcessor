@@ -3,7 +3,7 @@
 ![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
 
-## ALU
+### ALU
 - The ALU is essential to the implementation of the MIPS processesor 
 - We implemented a 32 bit ALU that can handle R, I, and J type instructions
 - Our ALU can preform the operations add, sub, and, or, nor
@@ -159,8 +159,72 @@
   - fill the upper 16 bits with the sign bit number
 - Output bits32_out (sign extended bits16_in)
 
-## Shifter 
-- We need the shifter for the beq instruction
-- In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
-- In order to get to the next address we must add 4, this is achieved by shifting our offset value 2 bits to the left
+### Data Memory
+- This module has two capabilites
+  - Load data from memeory 
+  - Save data to memory
+- This module has 4 inputs
+  - clk(1 bit)
+    - clock
+  - address(32 bit)
+    - address of the data
+  - write_en(1 bit)
+    - 1 or 0 to decide if we will write data
+  - write_data(32 bits)
+    - data that we want to write
+#### Load the all data from memory
+  - We load all the data from memory (data_memory.mem) into data_mem
+#### Locate 32 bits of memory we want and store it in read_data (output) 
+  - We locate the data in reg_mem with the address input
+  - read_data = {data_mem[address+3],data_mem[address+2],
+		             data_mem[address+1],data_mem[address]};
+    - We offset address by 0,1,2,3 each representing to 1 byte
+    - We will read 4 bytes of data which totals to 32 bits of data from memeory
+    - Output read_data(32 bits) 
+      - 32 bits of data which we read from the memory
+#### Save data to memory
+  - When clock goes from 0-1 we will see if we write data to memory
+  - If write_en is true
+    - We will write data to data_mem at the offset address of address from read_data
+      - Writing 4 bytes of data to memory
+        - data_mem[address] = write_data[7:0]
+        - data_mem[address+1] = write_data[15:8]
+        - data_mem[address+2] = write_data[23:16]
+        - data_mem[address+3] = write_data[31:24]
+      - Loading 1 byte of data at a time
+      - Notice 1 byte = 8 bits
+        - Increment address offsett by 1 byte
+        - Increment write_data by 8 bits
+      - Load all 32 bits from write data to memory at the correct address
+  - Else
+    - Rewrite memory data at address with the same data
+       - data_mem[address] = data_mem[address]
+       - data_mem[address+1] = data_mem[address+1]
+       - data_mem[address+2] = data_mem[address+2]
+       - data_mem[address+3] = data_mem[address+3]
+    - Keep the data in memory the same
+
+### Shifter 
+- This module is a shifter 
+- We need the shifter for the beq instruction if two register values = eachother
+- If register values = eachother
+  - We need to jump to 
+    - next inst address + offset*4
+      - Each instruction is 4 bytes so that's why we multiply by 4 
+      - It is to get to the correct position of the instruction we are jumping to
+  - To convert our offset to bytes we must * 4
+  - Shifting 2 bits left will achieve * 4
+- This module takes inputs
+  - indata(32 bits)
+    - offset
+  - shift_amt
+    - shift amount
+  - shift_left
+    - to determine if we shift left
+- if shiftleft true
+  - outdata(32 bits) = indata shifted left by shift_amt
+- else 
+  - outdata(32 bits) = indata shifted right by shift_amt
+- return outdata(32 bits)
+
 
