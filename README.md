@@ -3,7 +3,7 @@
 ![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
 
-## ALU
+### ALU
 - The ALU is essential to the implementation of the MIPS processesor 
 - We implemented a 32 bit ALU that can handle R, I, and J type instructions
 - Our ALU can preform the operations add, sub, and, or, nor
@@ -172,9 +172,9 @@
     - 1 or 0 to decide if we will write data
   - write_data(32 bits)
     - data that we want to write
-#### Load the data from memory
+#### Load the all data from memory
   - We load all the data from memory (data_memory.mem) into data_mem
-#### Load data from memory
+#### Locate 32 bits of memory we want and store it in read_data (output) 
   - We locate the data in reg_mem with the address input
   - read_data = {data_mem[address+3],data_mem[address+2],
 		             data_mem[address+1],data_mem[address]};
