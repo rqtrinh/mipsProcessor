@@ -228,3 +228,6 @@
 - return outdata(32 bits)
 
 
+# References
+### D Flip Flop
+https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
