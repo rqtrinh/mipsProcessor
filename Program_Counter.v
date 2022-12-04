@@ -6,14 +6,15 @@ module Program_Counter(
 	out_address
     );
 
-// Variables to stimulate d flip flop
+// Variables to stimulate d flip flop,
+// CLock and reset
 input clk, rst_n;
 // Address we might store
 input [31:0] in_address;
 // Output the address we are storing
 output reg [31:0] out_address;
 
-// At every clock cycle
+// D Flip Flop
 always @ (posedge clk or negedge rst_n)
 begin
   if(!rst_n)
