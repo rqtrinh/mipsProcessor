@@ -7,7 +7,7 @@ module Program_Counter(
     );
 
 // Variables to stimulate d flip flop,
-// CLock and reset
+// CLock and reset 
 input clk, rst_n;
 // Address we might store
 input [31:0] in_address;
