@@ -1,3 +1,4 @@
+// Preform specific operation on A and B determined by alu_control
 module Alu_Core(
 	A,
 	B,
@@ -6,7 +7,7 @@ module Alu_Core(
 	zero
     );
 
-// Input A and B 32 bits of respective register data
+// Input A and B 32 bits of data we will preform operation on
 input [31:0] A;
 input [31:0] B;
 // Input alu_control (determines what operation to do)

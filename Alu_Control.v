@@ -1,3 +1,4 @@
+// Determine what operation should be done in Alu_Core
 module Alu_Control(
 	opcode,
 	func_field,
