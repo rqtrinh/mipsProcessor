@@ -1,3 +1,15 @@
+`include "Program_Counter.v"
+`include "Adder.v"
+`include "Instruction_Memory.v"
+`include "Register_File.v"
+`include "Sign_Extension.v"
+`include "Shifter.v"
+`include "Alu_Top.v"
+`include "Data_Memory.v"
+`include "Control_Logic.v"
+`include "Alu_Control.v"
+`include "Alu_Core.v"
+
 module Processor_Top(
   clk,               
   rst_n              
@@ -32,12 +44,12 @@ assign final_write_en = (!rst_n) ? 1'b0 : ctrl_write_en;
 
 // calling the other processor files to work the processor and execution instruction 
 
-Program_Counter prg_cntr( 
- .clk (clk)), 
- .rest_n (rst_n)
- .in_address (ctrl_in_address), 
- .out_address(out_address)
-); 
+Program_Counter prg_cntr (
+  .clk (clk),
+  .rst_n (rst_n),
+  .in_address (ctrl_in_address),
+  .out_address (out_address)	
+);
 
 Adder adder_next_addr (
 .in1 (out_address),
