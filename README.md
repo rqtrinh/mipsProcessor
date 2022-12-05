@@ -365,3 +365,7 @@ Thus, will generate a new file within the working directory and can now be ran w
 - https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part1.html
 - https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part2.html
 - https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part3.html
+### Zybooks 
+- Computer Architecture 
+- zyBook ISBN: 979-8-203-03556-1
+- David A. Patterson, John L. Hennessy
