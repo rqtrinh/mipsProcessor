@@ -1,4 +1,10 @@
 # Mips Processor
+
+## Quickstart
+```
+iverilog -o processsor.vvp Processor_top_tb.v
+```
+
 ## General Details
 ![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
@@ -205,7 +211,6 @@
     - Keep the data in memory the same
 
 ### Shifter 
-- This module is a shifter 
 - We need the shifter for the beq instruction if two register values = eachother
 - If register values = eachother
   - We need to jump to 
@@ -227,21 +232,130 @@
   - outdata(32 bits) = indata shifted right by shift_amt
 - return outdata(32 bits)
 
-# References
-### D Flip Flop
-https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
-
-## Shifter 
-- We need the shifter for the beq instruction
-- In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
-- In order to get to the next address we must add 4, this is achieved by shifting our offset value 2 bits to the left  
-
-## Processor_top 
+### Processor_top 
 - Processor_top acts as a header file and it is calling passed a clock signal and restn which are values and initializing all the wires that are passed in 
 - This is the file that sets up process of an instruction execution by calling all of the other processor blocks like ALU, Data memory, program counter
 - Essentially this runs the processor by running all of the components together 
 
-## Control_Logic
+### Control_Logic
 - This file passes in parameter input and output 
 - This handles the functions of the control unit in a processor by taking input and using them to determine the values of the output wires
 - these output wires are setup to be used as inputs for other files 
+
+## Putting it all together!
+After implementing each component, we can now simulate the processors. We must provide input data for the processor.
+Each memory component as a corresponding file to populate it's data.
+
+### Instruction Memory
+We first populate instructions for the Instruction Memory to read directly off of a file called `instrn_memory.mem`, which contains the MIPS instructions.
+
+For instance, we want to simulate the following instructions:
+
+```
+00: add $t1, $t2, $t3        
+04: lw $t1, $t2, 16'd4
+08: beq $t1, $t2, offset
+0C: add $t1, $t2, $t3
+10: or $t2, $t3, $t4
+14: sw $t1, $t2, offset
+```
+
+We also would need to convert the MIP instructions into machine code.
+
+```
+00: 6'd0,5'd9,5'd10,5'd11,5'd0,6'h20
+04: 6'h23,5'd9,5'd10,16'd4
+08: 6'h04,5'd9,5'd9,16'd1 
+0C: 6'd0,5'd9,5'd10,5'd11,5'd0,6'h20
+10: 6'd0,5'd10,5'd11,5'd12,5'd0,6'h25
+14: 6'h2B,5'd9,5'd10,16'd4
+```
+
+And lastly down to hexadecimal representation.
+```
+00: 01 2A 58 20
+04: 8D 2A 00 04
+08: 11 29 00 01
+0C: 01 2A 58 20
+10: 01 4B 60 25
+14: AD 2A 00 04
+```
+
+In the `instrn_memory.mem`, the data needs to be formatted in a byte-wise manner. So every line in the file takes 1 byte.
+We break each byte of the hexadecimal representation starting from the top ending and go down left.
+
+In the file, it should look like the following:
+
+```
+20
+58
+2A
+01
+04
+00
+2A
+..
+```
+
+### Register Memory
+In the `reg_memory.mem` is where we can populate the registers data to the memory location corresponding to the particular register address.
+Since in our example we're using registers `$t1`, `$t2`, `$t3` and `$t4`, we should provide some inital values for the simulator can work with.
+
+```
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000011 <-- $t1 = 0x11
+00000022 <-- $t2 = 0x22
+```
+
+### Data Memory
+
+In the `data_memory.mem`, we can set the initial values during the load and store operations.
+
+The file will look like the following:
+```
+00
+00
+01
+00
+02
+00
+03
+00
+04
+00
+05
+00
+```
+
+## TestBench
+Once all of our components are implmenented, we can create the test bench for `Processor_top.v` file.
+In the Processor_Top, we need to provide the clock and the reset. From there, it will read all the memory provided files.
+
+In order to run the simulation the following commnad must be ran on the terminal.
+```
+iverilog -o processsor.vvp Processor_top_tb.v
+```
+
+This command will generate a `vvp` dumpfile, where we can use to simulate the waveforms.
+
+### Simulation Waveform
+
+From the `vvp` dumpfile, we run the following command to convert to `vcd` file.
+```
+vvp test.vvp
+```
+
+Thus, will generate a new file within the working directory and can now be ran within GTKWave.
+![waves](/assets/waves.png)
+
+# References
+### D Flip Flop
+https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
