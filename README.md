@@ -228,6 +228,23 @@
 - return outdata(32 bits)
 
 
+<<<<<<< Updated upstream
 # References
 ### D Flip Flop
 https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
+=======
+## Shifter 
+- We need the shifter for the beq instruction
+- In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
+- In order to get to the next address we must add 4, this is achieved by shifting our offset value 2 bits to the left  
+
+## Processor_top 
+- Processor_top acts as a header file and it is calling passed a clock signal and restn which are values and initializing all the wires that are passed in 
+- This is the file that sets up process of an instruction execution by calling all of the other processor blocks like ALU, Data memory, program counter
+- Essentially this runs the processor by running all of the components together 
+
+## Control_Logic
+- This file passes in parameter input and output 
+- This handles the functions of the control unit in a processor by taking input and using them to determine the values of the output wires
+- these output wires are setup to be used as inputs for other files 
+>>>>>>> Stashed changes
