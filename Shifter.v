@@ -1,10 +1,10 @@
 // This module is a shifter
 module Shifter(
-	indata,
-	shift_amt,
-	shift_left,
-	outdata
-    );
+  indata,
+  shift_amt,
+  shift_left,
+  outdata
+);
 // Input data (32 bits)
 input [31:0] indata;
 // Shift amount (2 bits)
@@ -15,9 +15,9 @@ input shift_left;
 output wire [31:0] outdata;
 
 // If shift_left true
-	// Shift indata left by shift_amt
+  // Shift indata left by shift_amt
 // Else
-	// Shift indata right by shift_amt
+  // Shift indata right by shift_amt
 assign outdata = shift_left ? indata<<shift_amt : indata>>shift_amt;
 
 endmodule

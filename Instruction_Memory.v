@@ -1,7 +1,7 @@
 // Get an instruction from instruction memory
 module Instruction_Memory(
-    instrn_address,
-	instrn
+  instrn_address,
+  instrn
 );
 
 // Address of instruction we want

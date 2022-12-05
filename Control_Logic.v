@@ -1,19 +1,19 @@
 module Control_Logic(
-	instrn,
-	instrn_opcode,
-	address_plus_4,
-	branch_address,
-	ctrl_in_address,
-	alu_result,
-	zero_out,
-	ctrl_write_en,
-	ctrl_write_addr,
-	read_data2,
-	sign_ext_out,
-	ctrl_aluin2,
-	ctrl_datamem_write_en,
-	datamem_read_data,
-	ctrl_regwrite_data
+  instrn,
+  instrn_opcode,
+  address_plus_4,
+  branch_address,
+  ctrl_in_address,
+  alu_result,
+  zero_out,
+  ctrl_write_en,
+  ctrl_write_addr,
+  read_data2,
+  sign_ext_out,
+  ctrl_aluin2,
+  ctrl_datamem_write_en,
+  datamem_read_data,
+  ctrl_regwrite_data
 );
 
 input [31:0] instrn;	 

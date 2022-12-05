@@ -1,6 +1,6 @@
 module Processor_Top(
-	clk,               
-	rst_n              
+  clk,               
+  rst_n              
 );
 
 input clk;
@@ -25,8 +25,10 @@ wire [31:0] alu_result;
 wire zero_out;
 wire [31:0] datamem_read_data;
 
-assign addr_incr = (!rst_n) ? 32'd0 : 32'd4; // assigning variabls using ternary operator to increment the address by 4 bits
-assign final_write_en = (!rst_n) ? 1'b0 : ctrl_write_en; // variable that gets 1 byte if true and a control right value if false
+// assigning variabls using ternary operator to increment the address by 4 bits 
+assign addr_incr = (!rst_n) ? 32'd0 : 32'd4; 
+// variable that gets 1 byte if true and a control right value if false
+assign final_write_en = (!rst_n) ? 1'b0 : ctrl_write_en;
 
 // calling the other processor files to work the processor and execution instruction 
 

@@ -1,11 +1,12 @@
 module Alu_Top(
-	opcode,
-	func_field,
-	A,
-	B,
-	result,
-	zero
-    );
+  opcode,
+  func_field,
+  A,
+  B,
+  result,
+  zero
+);
+
 // Input opcode
 input [5:0] opcode;
 // Input func_field

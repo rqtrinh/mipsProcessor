@@ -1,8 +1,9 @@
 // This module will sign extend to 32 bits
 module Sign_Extension(
-	bits16_in,
-	bits32_out
-    );
+  bits16_in,
+  bits32_out
+);
+
 // The offsett of lw or sw (16 bits)
 input [15:0] bits16_in;
 // Output the sign extended 16 bit input (32 bits)

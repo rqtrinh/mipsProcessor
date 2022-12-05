@@ -1,16 +1,16 @@
 // This module can load data from two registers
 // It can also write data to a register
 module Register_File(
-	clk,
-	rst_n,
-	read_addr1,
-	read_addr2,
-	write_en,
-	write_addr,
-	write_data,
-	read_data1,
-	read_data2
-    );
+  clk,
+  rst_n,
+  read_addr1,
+  read_addr2,
+  write_en,
+  write_addr,
+  write_data,
+  read_data1,
+  read_data2
+);
 
 // Used to stimulate D flip flop
 // Clock
@@ -45,19 +45,19 @@ assign read_data2 = reg_mem[read_addr2];
 // Stimulate d flip flop
 always @ (posedge clk or negedge rst_n)
 begin
-if (!rst_n)
-// Rewrite memory at register with same memory(keep same data)
-begin
-reg_mem[write_addr] <= reg_mem[write_addr];
-end
-else
-begin
-// If write_en true
-	// Rewrite data at specified register with write_data(32 bits)
-// Else
-	// Rewrite memory at register with same memory(keep same data)
-reg_mem[write_addr] <= write_en ? write_data : reg_mem[write_addr];
-end
+  if (!rst_n)
+    // Rewrite memory at register with same memory(keep same data)
+    begin
+      reg_mem[write_addr] <= reg_mem[write_addr];
+    end
+  else
+    begin
+      // If write_en true
+        // Rewrite data at specified register with write_data(32 bits)
+      // Else
+        // Rewrite memory at register with same memory(keep same data)
+      reg_mem[write_addr] <= write_en ? write_data : reg_mem[write_addr];
+    end
 end
 
 endmodule

@@ -1,12 +1,12 @@
 // This module can load and save data from memory
 module Data_Memory(
-	clk,
-	address,
-	write_en,
-	write_data,
-	read_data
-    );
-	 
+  clk,
+  address,
+  write_en,
+  write_data,
+  read_data
+);
+   
 // Clock
 input clk;
 // Address of memory we want 
@@ -31,21 +31,21 @@ end
 // Increment by 1 byte every time (total 4 bytes)
 // 4 bytes = 32 bits
 assign read_data = {data_mem[address+3],data_mem[address+2],
-		     data_mem[address+1],data_mem[address]};
+         data_mem[address+1],data_mem[address]};
 
 // When clock goes from 0 to 1
 always @ (posedge clk)
 begin
-// If write_en is true
-	// We will write write_data to memory
-	// We use address as the offsett
-	// We write in 1 byte at a time tottal 4 bytes or the entire 32 bit instruction
-// Else
-	// We rewrite the data in memory with the same data(data in memory stays the same)
-data_mem[address]   <= write_en ? write_data[7:0]   : data_mem[address];
-data_mem[address+1] <= write_en ? write_data[15:8]  : data_mem[address+1];
-data_mem[address+2] <= write_en ? write_data[23:16] : data_mem[address+2];
-data_mem[address+3] <= write_en ? write_data[31:24] : data_mem[address+3];
+  // If write_en is true
+    // We will write write_data to memory
+    // We use address as the offsett
+    // We write in 1 byte at a time tottal 4 bytes or the entire 32 bit instruction
+  // Else
+    // We rewrite the data in memory with the same data(data in memory stays the same)
+  data_mem[address]   <= write_en ? write_data[7:0]   : data_mem[address];
+  data_mem[address+1] <= write_en ? write_data[15:8]  : data_mem[address+1];
+  data_mem[address+2] <= write_en ? write_data[23:16] : data_mem[address+2];
+  data_mem[address+3] <= write_en ? write_data[31:24] : data_mem[address+3];
 end
 
 endmodule
