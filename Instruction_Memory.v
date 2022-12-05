@@ -1,8 +1,8 @@
 // Get an instruction from instruction memory
 module Instruction_Memory(
-	instrn_address,
+    instrn_address,
 	instrn
-    );
+);
 
 // Address of instruction we want
 input [31:0] instrn_address; //5-bit address holds 8 instructions of 32-bit width

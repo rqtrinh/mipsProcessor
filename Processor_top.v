@@ -1,12 +1,12 @@
 module Processor_Top(
-	clk,               #these are input (parameters)
+	clk,               
 	rst_n              
-    );
+);
 
 input clk;
 input rst_n;
 
-wire [31:0] ctrl_in_address;  #initialized variables 32 bits
+wire [31:0] ctrl_in_address;
 wire [31:0] out_address;
 wire [31:0] addr_incr;
 wire [31:0] address_plus_4;
@@ -25,19 +25,19 @@ wire [31:0] alu_result;
 wire zero_out;
 wire [31:0] datamem_read_data;
 
-assign addr_incr = (!rst_n) ? 32'd0 : 32'd4;  #assigning variabls using ternary operator to increment the address by 4 bits
-assign final_write_en = (!rst_n) ? 1'b0 : ctrl_write_en; #variable that gets 1 byte if true and a control right value if false
+assign addr_incr = (!rst_n) ? 32'd0 : 32'd4; // assigning variabls using ternary operator to increment the address by 4 bits
+assign final_write_en = (!rst_n) ? 1'b0 : ctrl_write_en; // variable that gets 1 byte if true and a control right value if false
 
-#calling the other processor files to work the processor and execution instruction 
+// calling the other processor files to work the processor and execution instruction 
 
 Program_Counter prg_cntr( 
  .clk (clk)), 
  .rest_n (rst_n)
  .in_address (ctrl_in_address), 
  .out_address(out_address)
- ); 
+); 
 
- Adder adder_next_addr (
+Adder adder_next_addr (
 .in1 (out_address),
 .in2 (addr_incr),
 .out (address_plus_4)

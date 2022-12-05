@@ -1,8 +1,5 @@
-
-
-module Control_Logic(  #definition of files name 
-      #bascially parameters
-	  instrn,
+module Control_Logic(
+	instrn,
 	instrn_opcode,
 	address_plus_4,
 	branch_address,
@@ -17,8 +14,7 @@ module Control_Logic(  #definition of files name
 	ctrl_datamem_write_en,
 	datamem_read_data,
 	ctrl_regwrite_data
-    );
-# defining parameters as input or output 
+);
 
 input [31:0] instrn;	 
 input [5:0] instrn_opcode;
@@ -37,22 +33,17 @@ output wire [31:0] ctrl_aluin2;
 output wire ctrl_datamem_write_en;
 output wire [31:0] ctrl_regwrite_data; 
 
-#assigning values of the values based on the boolean ternary operator 
+// assigning values of the values based on the boolean ternary operator 
 
 assign ctrl_in_address = (instrn_opcode==6'h04 && zero_out) ? branch_address : address_plus_4;
 
-
 assign ctrl_write_en = (instrn_opcode==6'h00) || (instrn_opcode==6'h23);
-
 
 assign ctrl_write_addr = (instrn_opcode==6'h00) ? instrn[15:11] : instrn[20:16];
 
-
 assign ctrl_regwrite_data = (instrn_opcode==6'h23) ? datamem_read_data : alu_result;
 
-
 assign ctrl_aluin2 = (instrn_opcode==6'h23 || instrn_opcode==6'h2B) ? sign_ext_out : read_data2;
-
 
 assign ctrl_datamem_write_en = (instrn_opcode==6'h2B); 
 

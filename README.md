@@ -227,12 +227,10 @@
   - outdata(32 bits) = indata shifted right by shift_amt
 - return outdata(32 bits)
 
-
-<<<<<<< Updated upstream
 # References
 ### D Flip Flop
 https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
-=======
+
 ## Shifter 
 - We need the shifter for the beq instruction
 - In the case it is true, we need to shift the 16 bit offset by 2 bits to the left to make 18 bit offset
@@ -247,4 +245,3 @@ https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
 - This file passes in parameter input and output 
 - This handles the functions of the control unit in a processor by taking input and using them to determine the values of the output wires
 - these output wires are setup to be used as inputs for other files 
->>>>>>> Stashed changes
