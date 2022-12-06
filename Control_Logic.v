@@ -43,14 +43,19 @@ assign branch_or_address_plus_4 = (instrn_opcode==6'h04 && zero_out) ? branch_ad
 // next Address
 assign ctrl_in_address = (instrn_opcode==6'h02) ? jump_address : branch_or_address_plus_4;
 
+// Variable to see if we want to write
 assign ctrl_write_en = (instrn_opcode==6'h00) || (instrn_opcode==6'h23);
 
+// Determine write address
 assign ctrl_write_addr = (instrn_opcode==6'h00) ? instrn[15:11] : instrn[20:16];
 
+// Determine what data we want to write to register
 assign ctrl_regwrite_data = (instrn_opcode==6'h23) ? datamem_read_data : alu_result;
 
+// Sign extended offset if LW or SW otherwise this is register 2 data
 assign ctrl_aluin2 = (instrn_opcode==6'h23 || instrn_opcode==6'h2B) ? sign_ext_out : read_data2;
 
+// Determine if we want to write to memory (SW)
 assign ctrl_datamem_write_en = (instrn_opcode==6'h2B); 
 
 endmodule
