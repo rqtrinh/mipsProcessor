@@ -14,8 +14,8 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - Debugging code
 - Deric Kwok
   - Processor_top_tb.v, Adder.v
-  - Translate MIPS to bytesize data
   - Compiling and testing code to produce waves
+  - Loading up initial files for test with instructions, register memory, and memory
   - Debugging Code
 
 ## Features
