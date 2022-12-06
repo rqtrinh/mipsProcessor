@@ -7,7 +7,8 @@ iverilog -o processsor.vvp Processor_top_tb.v
 # Names/Contributions
 - Ryan Trinh
   - Alu_Control.v, Alu_Core.v, Alu_Top.v, Instruction_Memory.v, Program_Counter, Register_File, Sign_Extension.v, Data_Memory.v, Shifter_Branch, Shifter_Jump, Concat_Jump_Addr
-  - Comments on implemented parts
+  - Implemntation of the individual parts of MIPS Processor
+  - Explanation of each part and why it is necessary
   - Debugging code
 - Brian Nguyen
   - Processor_Top.v, Control_Logic.v
