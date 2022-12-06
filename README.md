@@ -9,11 +9,13 @@ iverilog -o processsor.vvp Processor_top_tb.v
 ![mips](https://user-images.githubusercontent.com/76807966/205785724-68438a48-8d04-48df-b1ea-505251b21f59.png)
 
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
+- We implemented a 32 bit ALU that can handle R, I, and J type instructions
+- Instructions we implemented are 
+	- ADD, SUB, AND, OR, NOR, SLT, LW, SW, BEQ, J
 
 ### ALU
 - The ALU is essential to the implementation of the MIPS processesor 
-- We implemented a 32 bit ALU that can handle R, I, and J type instructions
-- Our ALU can preform the operations add, sub, and, or, nor
+- Our ALU can preform the operations add, sub, and, or, nor, less than
 - Operations such as lw, sw, beq are built upon the basic operations add, sub
 - It will preform operations based on the input values and yield a result value
 - This is the table we will be using for alu control 
@@ -23,9 +25,9 @@ iverilog -o processsor.vvp Processor_top_tb.v
 
 #### Alu_Control
 - Values are in hex
-- This module takes inputs opocode(6 bits) and func_field(6 bits) 
+- This module takes inputs opcode(6 bits) and func_field(6 bits) 
 - It outputs alu_control(3 bits)
-- Essentially this module take the opocode and function field of the mips instruction and determines what operation should be preformed
+- Essentially this module take the opcode and function field of the mips instruction and determines what operation should be preformed
   - alu_control represents what operation should be done
     - 0 = Addition
     - 1 = Subtraction
@@ -38,10 +40,10 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - If func_field = ADD, SUB, AND, OR, NOR, SLT
   - func_code = (0-5 matching the corresponding operation, it is 3 bits)
   - Otherwise func_code = 0 as default
-- Now it looks at opocode 
-  - If opocode = 00, then alu_control = func_code 
-  - If opocode = 04, then alu_control = 1 (Subtraction)
-  - If opocode = 23 or 2B, then alu control  = 0 (Addition)
+- Now it looks at opcode 
+  - If opcode = 00, then alu_control = func_code 
+  - If opcode = 04, then alu_control = 1 (Subtraction)
+  - If opcode = 23 or 2B, then alu control  = 0 (Addition)
   - Otherwise alu_control = 0 as default (Addition)
 - Output alu_control(3 bits)
 
@@ -70,7 +72,7 @@ iverilog -o processsor.vvp Processor_top_tb.v
 - The Alu_Top module ties together Alu_Control and Alu_Core
 - It calls Alu_Control get the output and calls Alu_Core with this output
 - It has 4 inputs
-  - opocode (5 bit)
+  - opcode (5 bit)
   - func_field (5 bit)
   - A (32 bit value)
   - B (32 bit value)
@@ -78,7 +80,7 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - Result(32 bit)
   - Zero(1 bit)
 - It initializes alu_control(3 bits)
-- First it calls Alu_Control with inputs opocode(5 bits), func_field(5 bit)
+- First it calls Alu_Control with inputs opcode(5 bits), func_field(5 bit)
   - alu_control(3 bits) is outputed from this module with a value of (0-5)
 - The module then calls Alu_Core with inputs A(32 bit value), B(32 bit value), alu_control(3 bits)
   - It outputs the result(32 bits) of the operation(determined by alu_control) done on A and B
@@ -211,7 +213,7 @@ iverilog -o processsor.vvp Processor_top_tb.v
        - data_mem[address+3] = data_mem[address+3]
     - Keep the data in memory the same
 
-### Shifter 
+### Shifter_Branch
 - We need the shifter for the beq instruction if two register values = eachother
 - If register values = eachother
   - We need to jump to 
@@ -233,6 +235,42 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - outdata(32 bits) = indata shifted right by shift_amt
 - return outdata(32 bits)
 
+### Enabling Jump 
+### Shifter_Jump
+- We need a shifter to enable jump
+- The shifter is taking the addr of J instruction and shifting left two bits
+- This module takes inputs
+  - indata(26 bits)
+  - shift_amt(2 bits)
+  - shift_left(1 bit)
+  - outdata(28 bits)
+- if shift left true
+  - outdata = indata<<shift_amt
+  - outdata is indata shifted left by shift amoutn(will shifted by 2 for our purposes)
+- else shift left true
+  - outdata = indata>>shift_amt
+  - outdata is indata shifted right by shift amoutn(will shifted by 2 for our purposes)
+- Output outdata
+
+### Concat_Jump_Addr
+- This module will get the jump address
+- This module takes inputs
+   - address_plus_4(32 bits)
+     - current address incremented by 4
+   - bits28_in 
+     - addr of j instruction shifted left by 2
+- jump_address = {address_plus_4[31:28], bits28_in[27:0]}
+  - concatenate top 4 bits of address_plus_4 to bits28_in
+- output jump_address
+
+### Adder
+- This module adds two variables
+- Inputs 
+ - in1 (32 bits)
+ - in2 (32 bits)
+- when in1 or in2 changes
+  - out = in1+in2
+- output out
 ### Processor_top 
 - Processor_top acts as a header file and it is calling passed a clock signal and restn which are values and initializing all the wires that are passed in 
 - This is the file that sets up process of an instruction execution by calling all of the other processor blocks like ALU, Data memory, program counter
@@ -270,8 +308,14 @@ iverilog -o processsor.vvp Processor_top_tb.v
     - memWrite
     - ALUsrc
     - regWrite
-
-   - Based on the wire assign ctrl_in_address it will move to BEQ branch or address incrementation 
+ 
+   - branch_or_address_plus_4
+     - Chose either address incrementation or branch_address condition(h'04 and zero_out)
+     - h'04 is opcode for branch and zero_out is 0
+   
+   - Assign ctrl_in_address to jump_address or branch_or_address_plus_4 using opcode h'02 (jump opcode) as condition
+   
+   - ctrl_in_address is the address of the next instruction we want to execute
 
    - Based on wire ctrl_write_en this will endable regFile for R-type or LW instruction 
 
