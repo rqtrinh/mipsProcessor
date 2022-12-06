@@ -236,6 +236,11 @@ iverilog -o processsor.vvp Processor_top_tb.v
 - return outdata(32 bits)
 
 ### Enabling Jump 
+- jump opocode = h'20
+- lower 26 bits is the address we want to jump to
+- in our MIPS processoer we always calcuate for the jump address
+- our control logic determines if we should take it our not
+
 ### Shifter_Jump
 - We need a shifter to enable jump
 - The shifter is taking the addr of J instruction and shifting left two bits
