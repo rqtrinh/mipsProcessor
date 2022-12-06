@@ -398,4 +398,14 @@ Thus, will generate a new file within the working directory and can now be ran w
 
 # References
 ### D Flip Flop
-https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
+- https://www.fpga4student.com/2017/02/verilog-code-for-d-flip-flop.html
+### ALU
+- https://electrobinary.blogspot.com/2021/02/alu-design-in-verilog-using-mips.html
+### MIPS Processor
+- https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part1.html
+- https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part2.html
+- https://electrobinary.blogspot.com/2021/02/mips-processor-design-using-verilog-part3.html
+### Zybooks 
+- Computer Architecture 
+- zyBook ISBN: 979-8-203-03556-1
+- David A. Patterson, John L. Hennessy
