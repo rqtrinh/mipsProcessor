@@ -6,7 +6,8 @@ iverilog -o processsor.vvp Processor_top_tb.v
 ```
 
 ## General Details
-![mips](https://user-images.githubusercontent.com/89550444/205396987-f9da7135-b9f0-48d8-b06e-df07d91bf3f4.png)
+![mips](![image](https://user-images.githubusercontent.com/76807966/205785578-7074abef-397f-4417-b814-97f95125a315.png)
+)
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
 
 ### ALU
