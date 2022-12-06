@@ -265,12 +265,14 @@ iverilog -o processsor.vvp Processor_top_tb.v
 
 ### Adder
 - This module adds two variables
+- We will use this to increment our address
 - Inputs 
  - in1 (32 bits)
  - in2 (32 bits)
 - when in1 or in2 changes
   - out = in1+in2
 - output out
+
 ### Processor_top 
 - Processor_top acts as a header file and it is calling passed a clock signal and restn which are values and initializing all the wires that are passed in 
 - This is the file that sets up process of an instruction execution by calling all of the other processor blocks like ALU, Data memory, program counter
