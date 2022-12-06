@@ -408,4 +408,7 @@ Thus, will generate a new file within the working directory and can now be ran w
 ### Zybooks 
 - Computer Architecture 
 - zyBook ISBN: 979-8-203-03556-1
-- David A. Patterson, John L. Hennessy
+- David A. Patterson, John L. Hennessy 
+
+### Verilog Reference
+- https://www.iitg.ac.in/hemangee/cs224_2020/verilog2.pdf 
