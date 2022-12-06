@@ -12,12 +12,11 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - Debugging Code
 ### Brian Nguyen
   - Processor_Top.v, Control_Logic.v
-  - Explanation of these modules
+  - Implemntation/explanation of these modules
   - Debugging code
 ### Ryan Trinh
   - Alu_Control.v, Alu_Core.v, Alu_Top.v, Instruction_Memory.v, Program_Counter, Register_File, Sign_Extension.v, Data_Memory.v, Shifter_Branch, Shifter_Jump, Concat_Jump_Addr
-  - Implementation of the individual parts of MIPS Processor
-  - Explanation of each part/module and why it is necessary
+  - Implemntation/explanation of these modules
   - Added comments to most of the files to explain what the code is doing
   - Debugging code
 
