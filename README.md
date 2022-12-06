@@ -12,7 +12,7 @@ iverilog -o processsor.vvp Processor_top_tb.v
   - Debugging Code
 ### Brian Nguyen
   - Processor_Top.v, Control_Logic.v
-  - Implemntation/explanation of these modules
+  - Implementation/explanation of these modules
   - Debugging code
 ### Ryan Trinh
   - Alu_Control.v, Alu_Core.v, Alu_Top.v, Instruction_Memory.v, Program_Counter, Register_File, Sign_Extension.v, Data_Memory.v, Shifter_Branch, Shifter_Jump, Concat_Jump_Addr
