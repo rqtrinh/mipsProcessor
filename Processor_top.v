@@ -1,6 +1,6 @@
 `include "Program_Counter.v"
 `include "Adder.v"
-`include "Concat_Jump_Addr"
+`include "Concat_Jump_Addr.v"
 `include "Instruction_Memory.v"
 `include "Register_File.v"
 `include "Sign_Extension.v"
@@ -68,10 +68,10 @@ Adder adder_branch_addr (
 );
 
 Concat_Jump_Addr concat_jump_addr (
-.address_plus_4(address_plus_4)
-.bits28_in(j_lower_28)
+.address_plus_4(address_plus_4),
+.bits28_in(j_lower_28),
 .jump_address(jump_address)
-)
+);
 
 Instruction_Memory instr_mem (
 .instrn_address (out_address),
@@ -103,9 +103,9 @@ Shifter_Branch shifter_branch (
 );
 
 Shifter_Jump shifter_jump (
-.indata (instrn[25:0]),
-.shift_amt (2'd2),
-.shift_left (1'b1),
+.indata (instrn[25:0]), // address
+.shift_amt (2'd2), // the amount your shifting to
+.shift_left (1'b1), // shift left: boolean
 .outdata (j_lower_28)
 );
 

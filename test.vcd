@@ -1,5 +1,5 @@
 $date
-	Mon Dec  5 02:40:53 2022
+	Mon Dec  5 18:03:47 2022
 $end
 $version
 	Icarus Verilog
@@ -18,177 +18,203 @@ $var wire 32 $ sign_ext_out [31:0] $end
 $var wire 32 % read_data2 [31:0] $end
 $var wire 32 & read_data1 [31:0] $end
 $var wire 32 ' out_address [31:0] $end
-$var wire 32 ( instrn [31:0] $end
-$var wire 1 ) final_write_en $end
-$var wire 32 * datamem_read_data [31:0] $end
-$var wire 1 + ctrl_write_en $end
-$var wire 5 , ctrl_write_addr [4:0] $end
-$var wire 32 - ctrl_regwrite_data [31:0] $end
-$var wire 32 . ctrl_in_address [31:0] $end
-$var wire 1 / ctrl_datamem_write_en $end
-$var wire 32 0 ctrl_aluin2 [31:0] $end
-$var wire 32 1 branch_address [31:0] $end
-$var wire 32 2 branch_addr_offset [31:0] $end
-$var wire 32 3 alu_result [31:0] $end
-$var wire 32 4 address_plus_4 [31:0] $end
-$var wire 32 5 addr_incr [31:0] $end
+$var wire 32 ( jump_address [31:0] $end
+$var wire 28 ) j_lower_28 [27:0] $end
+$var wire 32 * instrn [31:0] $end
+$var wire 1 + final_write_en $end
+$var wire 32 , datamem_read_data [31:0] $end
+$var wire 1 - ctrl_write_en $end
+$var wire 5 . ctrl_write_addr [4:0] $end
+$var wire 32 / ctrl_regwrite_data [31:0] $end
+$var wire 32 0 ctrl_in_address [31:0] $end
+$var wire 1 1 ctrl_datamem_write_en $end
+$var wire 32 2 ctrl_aluin2 [31:0] $end
+$var wire 32 3 branch_address [31:0] $end
+$var wire 32 4 branch_addr_offset [31:0] $end
+$var wire 32 5 alu_result [31:0] $end
+$var wire 32 6 address_plus_4 [31:0] $end
+$var wire 32 7 addr_incr [31:0] $end
 $scope module adder_branch_addr $end
-$var wire 32 6 in2 [31:0] $end
-$var wire 32 7 in1 [31:0] $end
-$var reg 32 8 out [31:0] $end
+$var wire 32 8 in2 [31:0] $end
+$var wire 32 9 in1 [31:0] $end
+$var reg 32 : out [31:0] $end
 $upscope $end
 $scope module adder_next_addr $end
-$var wire 32 9 in2 [31:0] $end
-$var wire 32 : in1 [31:0] $end
-$var reg 32 ; out [31:0] $end
+$var wire 32 ; in2 [31:0] $end
+$var wire 32 < in1 [31:0] $end
+$var reg 32 = out [31:0] $end
 $upscope $end
 $scope module alu $end
-$var wire 6 < func_field [5:0] $end
-$var wire 6 = opcode [5:0] $end
+$var wire 6 > func_field [5:0] $end
+$var wire 6 ? opcode [5:0] $end
 $var wire 1 # zero $end
-$var wire 32 > result [31:0] $end
-$var wire 3 ? alu_control [2:0] $end
-$var wire 32 @ B [31:0] $end
-$var wire 32 A A [31:0] $end
+$var wire 32 @ result [31:0] $end
+$var wire 3 A alu_control [2:0] $end
+$var wire 32 B B [31:0] $end
+$var wire 32 C A [31:0] $end
 $scope module alu_core_inst $end
 $var wire 1 # zero $end
-$var wire 3 B alu_control [2:0] $end
-$var wire 32 C B [31:0] $end
-$var wire 32 D A [31:0] $end
-$var reg 32 E result [31:0] $end
+$var wire 3 D alu_control [2:0] $end
+$var wire 32 E B [31:0] $end
+$var wire 32 F A [31:0] $end
+$var reg 32 G result [31:0] $end
 $upscope $end
 $scope module alu_ctrlr_inst $end
-$var wire 6 F func_field [5:0] $end
-$var wire 6 G opcode [5:0] $end
-$var reg 3 H alu_control [2:0] $end
-$var reg 3 I func_code [2:0] $end
+$var wire 6 H func_field [5:0] $end
+$var wire 6 I opcode [5:0] $end
+$var reg 3 J alu_control [2:0] $end
+$var reg 3 K func_code [2:0] $end
 $upscope $end
+$upscope $end
+$scope module concat_jump_addr $end
+$var wire 32 L address_plus_4 [31:0] $end
+$var wire 32 M jump_address [31:0] $end
+$var wire 28 N bits28_in [27:0] $end
 $upscope $end
 $scope module ctrl_logic $end
-$var wire 32 J address_plus_4 [31:0] $end
-$var wire 32 K alu_result [31:0] $end
-$var wire 32 L branch_address [31:0] $end
-$var wire 1 + ctrl_write_en $end
-$var wire 6 M instrn_opcode [5:0] $end
+$var wire 32 O address_plus_4 [31:0] $end
+$var wire 32 P alu_result [31:0] $end
+$var wire 32 Q branch_address [31:0] $end
+$var wire 1 - ctrl_write_en $end
+$var wire 6 R instrn_opcode [5:0] $end
+$var wire 32 S jump_address [31:0] $end
 $var wire 1 # zero_out $end
-$var wire 32 N sign_ext_out [31:0] $end
-$var wire 32 O read_data2 [31:0] $end
-$var wire 32 P instrn [31:0] $end
-$var wire 32 Q datamem_read_data [31:0] $end
-$var wire 5 R ctrl_write_addr [4:0] $end
-$var wire 32 S ctrl_regwrite_data [31:0] $end
-$var wire 32 T ctrl_in_address [31:0] $end
-$var wire 1 / ctrl_datamem_write_en $end
-$var wire 32 U ctrl_aluin2 [31:0] $end
+$var wire 32 T sign_ext_out [31:0] $end
+$var wire 32 U read_data2 [31:0] $end
+$var wire 32 V instrn [31:0] $end
+$var wire 32 W datamem_read_data [31:0] $end
+$var wire 5 X ctrl_write_addr [4:0] $end
+$var wire 32 Y ctrl_regwrite_data [31:0] $end
+$var wire 32 Z ctrl_in_address [31:0] $end
+$var wire 1 1 ctrl_datamem_write_en $end
+$var wire 32 [ ctrl_aluin2 [31:0] $end
+$var wire 1 \ branch_or_address_plus_4 $end
 $upscope $end
 $scope module data_mem $end
-$var wire 32 V address [31:0] $end
+$var wire 32 ] address [31:0] $end
 $var wire 1 ! clk $end
-$var wire 1 / write_en $end
-$var wire 32 W write_data [31:0] $end
-$var wire 32 X read_data [31:0] $end
+$var wire 1 1 write_en $end
+$var wire 32 ^ write_data [31:0] $end
+$var wire 32 _ read_data [31:0] $end
 $upscope $end
 $scope module instr_mem $end
-$var wire 32 Y instrn_address [31:0] $end
-$var wire 32 Z instrn [31:0] $end
+$var wire 32 ` instrn_address [31:0] $end
+$var wire 32 a instrn [31:0] $end
 $upscope $end
 $scope module prg_cntr $end
 $var wire 1 ! clk $end
-$var wire 32 [ in_address [31:0] $end
+$var wire 32 b in_address [31:0] $end
 $var wire 1 " rst_n $end
-$var reg 32 \ out_address [31:0] $end
+$var reg 32 c out_address [31:0] $end
 $upscope $end
 $scope module regfile $end
 $var wire 1 ! clk $end
-$var wire 5 ] read_addr1 [4:0] $end
-$var wire 5 ^ read_addr2 [4:0] $end
-$var wire 32 _ read_data1 [31:0] $end
-$var wire 32 ` read_data2 [31:0] $end
+$var wire 5 d read_addr1 [4:0] $end
+$var wire 5 e read_addr2 [4:0] $end
+$var wire 32 f read_data1 [31:0] $end
+$var wire 32 g read_data2 [31:0] $end
 $var wire 1 " rst_n $end
-$var wire 5 a write_addr [4:0] $end
-$var wire 32 b write_data [31:0] $end
-$var wire 1 ) write_en $end
+$var wire 5 h write_addr [4:0] $end
+$var wire 32 i write_data [31:0] $end
+$var wire 1 + write_en $end
 $upscope $end
-$scope module shifter $end
-$var wire 32 c outdata [31:0] $end
-$var wire 2 d shift_amt [1:0] $end
-$var wire 1 e shift_left $end
-$var wire 32 f indata [31:0] $end
+$scope module shifter_branch $end
+$var wire 32 j outdata [31:0] $end
+$var wire 2 k shift_amt [1:0] $end
+$var wire 1 l shift_left $end
+$var wire 32 m indata [31:0] $end
+$upscope $end
+$scope module shifter_jump $end
+$var wire 26 n indata [25:0] $end
+$var wire 28 o outdata [27:0] $end
+$var wire 2 p shift_amt [1:0] $end
+$var wire 1 q shift_left $end
 $upscope $end
 $scope module sign_ext $end
-$var wire 16 g bits16_in [15:0] $end
-$var wire 32 h bits32_out [31:0] $end
+$var wire 16 r bits16_in [15:0] $end
+$var wire 32 s bits32_out [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b101100000100000 h
-b101100000100000 g
-b101100000100000 f
-1e
-b10 d
-b10110000010000000 c
-b110011 b
-b1011 a
-b100010 `
-b10001 _
-b1010 ^
-b1001 ]
-b0 \
-b0 [
-b1001010100101100000100000 Z
-b0 Y
-bx X
-b100010 W
-b110011 V
+b101100000100000 s
+b101100000100000 r
+1q
+b10 p
+b100101010010110000010000000 o
+b1001010100101100000100000 n
+b101100000100000 m
+1l
+b10 k
+b10110000010000000 j
+b110011 i
+b1011 h
+b100010 g
+b10001 f
+b1010 e
+b1001 d
+b0 c
+b0 b
+b1001010100101100000100000 a
+b0 `
+bx _
+b100010 ^
+b110011 ]
+0\
+b100010 [
+b0 Z
+b110011 Y
+b1011 X
+bx W
+b1001010100101100000100000 V
 b100010 U
-b0 T
-b110011 S
-b1011 R
-bx Q
-b1001010100101100000100000 P
-b100010 O
-b101100000100000 N
-b0 M
-b10110000010000000 L
-b110011 K
+b101100000100000 T
+b100101010010110000010000000 S
+b0 R
+b10110000010000000 Q
+b110011 P
+b0 O
+b100101010010110000010000000 N
+b100101010010110000010000000 M
+b0 L
+b0 K
 b0 J
 b0 I
-b0 H
-b0 G
-b100000 F
-b110011 E
-b10001 D
-b100010 C
-b0 B
-b10001 A
-b100010 @
+b100000 H
+b110011 G
+b10001 F
+b100010 E
+b0 D
+b10001 C
+b100010 B
+b0 A
+b110011 @
 b0 ?
-b110011 >
+b100000 >
 b0 =
-b100000 <
+b0 <
 b0 ;
-b0 :
+b10110000010000000 :
 b0 9
 b10110000010000000 8
 b0 7
-b10110000010000000 6
-b0 5
-b0 4
-b110011 3
-b10110000010000000 2
-b10110000010000000 1
-b100010 0
-0/
-b0 .
-b110011 -
-b1011 ,
-1+
-bx *
-0)
-b1001010100101100000100000 (
+b0 6
+b110011 5
+b10110000010000000 4
+b10110000010000000 3
+b100010 2
+01
+b0 0
+b110011 /
+b1011 .
+1-
+bx ,
+0+
+b1001010100101100000100000 *
+b100101010010110000010000000 )
+b100101010010110000010000000 (
 b0 '
 b10001 &
 b100010 %
@@ -208,360 +234,44 @@ $end
 #25
 0!
 #30
-b100 .
-b100 T
-b100 [
-b10110000010000100 1
-b10110000010000100 8
-b10110000010000100 L
-b100 4
+b10110000010000100 3
+b10110000010000100 :
+b10110000010000100 Q
+b100 6
+b100 9
+b100 =
+b100 L
+b100 O
 b100 7
 b100 ;
-b100 J
-b100 5
-b100 9
-1)
+1+
 1!
 1"
 #35
 0!
 #40
-b0 ,
-b0 R
-b0 a
-b1000 .
-b1000 T
-b1000 [
-b11000 1
-b11000 8
-b11000 L
-b100 <
-b100 F
-b10000 2
-b10000 6
-b10000 c
-b100 $
-b100 N
-b100 f
-b100 h
-b100 g
-b1000 4
-b1000 7
-b1000 ;
-b1000 J
-b1001010100000000000000100 (
-b1001010100000000000000100 P
-b1001010100000000000000100 Z
-b100 '
-b100 :
-b100 Y
-b100 \
 1!
 #45
 0!
 #50
-b10101 3
-b10101 >
-b10101 E
-b10101 K
-b10101 V
-b100 0
-b100 @
-b100 C
-b100 U
-b1010 ,
-b1010 R
-b1010 a
-bx -
-bx S
-bx b
-b1100 .
-b1100 T
-b1100 [
-b11100 1
-b11100 8
-b11100 L
-b100011 M
-b100011 =
-b100011 G
-b1100 4
-b1100 7
-b1100 ;
-b1100 J
-b10001101001010100000000000000100 (
-b10001101001010100000000000000100 P
-b10001101001010100000000000000100 Z
-b1000 '
-b1000 :
-b1000 Y
-b1000 \
 1!
 #55
 0!
 #60
-0)
-1#
-b10000000000000000 *
-b10000000000000000 Q
-b10000000000000000 X
-b0 3
-b0 >
-b0 E
-b0 K
-b0 V
-b10001 0
-b10001 @
-b10001 C
-b10001 U
-b1001 ,
-b1001 R
-b1001 a
-0+
-b0 -
-b0 S
-b0 b
-b1 ?
-b1 B
-b1 H
-b10100 .
-b10100 T
-b10100 [
-b10100 1
-b10100 8
-b10100 L
-b1 <
-b1 F
-b100 2
-b100 6
-b100 c
-b1 $
-b1 N
-b1 f
-b1 h
-b1 g
-b1001 ^
-b100 M
-b100 =
-b100 G
-b10000 4
-b10000 7
-b10000 ;
-b10000 J
-b10001001010010000000000000001 (
-b10001001010010000000000000001 P
-b10001001010010000000000000001 Z
-b1100 '
-b1100 :
-b1100 Y
-b1100 \
-b10001 %
-b10001 O
-b10001 W
-b10001 `
 1!
 #65
 0!
 #70
-bx11xx11 -
-bx11xx11 S
-bx11xx11 b
-1)
-b11000 .
-b11000 T
-b11000 [
-b110011 0
-b110011 @
-b110011 C
-b110011 U
-0#
-bx *
-bx Q
-bx X
-bx11xx11 3
-bx11xx11 >
-bx11xx11 E
-bx11xx11 K
-bx11xx11 V
-1+
-b1100 ,
-b1100 R
-b1100 a
-b11 ?
-b11 B
-b11 H
-b11 I
-b11000000010101100 1
-b11000000010101100 8
-b11000000010101100 L
-b100101 <
-b100101 F
-b11000000010010100 2
-b11000000010010100 6
-b11000000010010100 c
-b110000000100101 $
-b110000000100101 N
-b110000000100101 f
-b110000000100101 h
-b110000000100101 g
-b110011 %
-b110011 O
-b110011 W
-b110011 `
-b1011 ^
-bx &
-bx A
-bx D
-bx _
-b1010 ]
-b0 M
-b0 =
-b0 G
-b11000 4
-b11000 7
-b11000 ;
-b11000 J
-b1010010110110000000100101 (
-b1010010110110000000100101 P
-b1010010110110000000100101 Z
-b10100 '
-b10100 :
-b10100 Y
-b10100 \
 1!
 #75
 0!
 #80
-b10101 -
-b10101 S
-b10101 b
-0)
-b100 0
-b100 @
-b100 C
-b100 U
-b10101 3
-b10101 >
-b10101 E
-b10101 K
-b10101 V
-0+
-b1010 ,
-b1010 R
-b1010 a
-b0 ?
-b0 B
-b0 H
-b0 I
-b11100 .
-b11100 T
-b11100 [
-b101100 1
-b101100 8
-b101100 L
-b100 <
-b100 F
-b10000 2
-b10000 6
-b10000 c
-b100 $
-b100 N
-b100 f
-b100 h
-b100 g
-bx %
-bx O
-bx W
-bx `
-b1010 ^
-b10001 &
-b10001 A
-b10001 D
-b10001 _
-b1001 ]
-1/
-b101011 M
-b101011 =
-b101011 G
-b11100 4
-b11100 7
-b11100 ;
-b11100 J
-b10101101001010100000000000000100 (
-b10101101001010100000000000000100 P
-b10101101001010100000000000000100 Z
-b11000 '
-b11000 :
-b11000 Y
-b11000 \
 1!
 #85
 0!
 #90
-x)
-bx 0
-bx @
-bx C
-bx U
-x+
-bx ,
-bx R
-bx a
-bx -
-bx S
-bx b
-x#
-bx 3
-bx >
-bx E
-bx K
-bx V
-bx .
-bx T
-bx [
-bx 1
-bx 8
-bx L
-bx <
-bx F
-bx00 2
-bx00 6
-bx00 c
-bx $
-bx N
-bx f
-bx h
-bx g
-bx ^
-x/
-bx M
-bx =
-bx G
-bx &
-bx A
-bx D
-bx _
-bx ]
-b100000 4
-b100000 7
-b100000 ;
-b100000 J
-bx (
-bx P
-bx Z
-b11100 '
-b11100 :
-b11100 Y
-b11100 \
 1!
 #95
 0!
 #100
-bx 4
-bx 7
-bx ;
-bx J
-bx '
-bx :
-bx Y
-bx \
 1!

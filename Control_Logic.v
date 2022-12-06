@@ -3,6 +3,7 @@ module Control_Logic(
   instrn_opcode,
   address_plus_4,
   branch_address,
+  jump_address,
   ctrl_in_address,
   alu_result,
   zero_out,
@@ -20,7 +21,7 @@ input [31:0] instrn;
 input [5:0] instrn_opcode;
 input [31:0] address_plus_4;
 input [31:0] branch_address;
-input [31:0] jump_address
+input [31:0] jump_address;
 input [31:0] datamem_read_data;
 input [31:0] alu_result;
 input zero_out;
@@ -34,13 +35,12 @@ output wire [31:0] ctrl_aluin2;
 output wire ctrl_datamem_write_en;
 output wire [31:0] ctrl_regwrite_data; 
 
-reg branch_or_address_plus_4[31:0]
-
 // Assigning values of the values based on the boolean ternary operator 
 // Select branch address or address_plus_4
-branch_or_address_plus_4 = (instrn_opcode==6'h04 && zero_out) ? branch_address : address_plus_4;
+assign branch_or_address_plus_4 = (instrn_opcode==6'h04 && zero_out) ? branch_address : address_plus_4;
 
 // Select jump address or previous address selected
+// next Address
 assign ctrl_in_address = (instrn_opcode==6'h02) ? jump_address : branch_or_address_plus_4;
 
 assign ctrl_write_en = (instrn_opcode==6'h00) || (instrn_opcode==6'h23);
