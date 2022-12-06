@@ -236,11 +236,51 @@ iverilog -o processsor.vvp Processor_top_tb.v
 - Processor_top acts as a header file and it is calling passed a clock signal and restn which are values and initializing all the wires that are passed in 
 - This is the file that sets up process of an instruction execution by calling all of the other processor blocks like ALU, Data memory, program counter
 - Essentially this runs the processor by running all of the components together 
-
+- The wires assigned are used as parameters for the other modules that are put together 
+- Processor_top puts together the processor by utilizing 
+    - prg_cntr
+    - adder
+    - instr_mem
+    - regfile
+    - sign_ext
+    - shifter 
+    - alu 
+    - data_mem
+    - ctrl_logic
+ - This starts at the program counter for fetching the next instruction 
+ - which will then be added and goes through module instr_mem
+ - the reg file will store addressed for bits for two registers instrn[25:21] and instrn [20:16] 
+ - sign extention will be used for I-Type instruction with instruction[15:0]
+ - The R Types are split and are handled in register file for instrucitons [15:11] [10:6] and [5:0]
+ -  outputs of the register file will be determined by type of instruciton and determined by the control unit
+ - All the modules are critical in order to lead the registers down the processor 
+ 
 ### Control_Logic
 - This file passes in parameter input and output 
 - This handles the functions of the control unit in a processor by taking input and using them to determine the values of the output wires
 - these output wires are setup to be used as inputs for other files 
+- Since the processor consists of different fields based on the Mips instruction format the control  logic determines based on high or low signals from instruction [31 - 26] which is the opcode it will go through these
+    - ReqDst 
+    - Jump
+    - Branch 
+    - memRead 
+    - memToReg
+    - Alu OP
+    - memWrite
+    - ALUsrc
+    - regWrite
+
+   - Based on the wire assign ctrl_in_address it will move to BEQ branch or address incrementation 
+
+   - Based on wire ctrl_write_en this will endable regFile for R-type or LW instruction 
+
+   - Depending on what ctrl_regwrite_data contains it will write into the regfile Data mem for the   LW or from ALU
+
+   - for ctrl_aluin2 the second input of ALU will recieve from regfile R type or sign ext unit (LW & Sw)
+
+   - for ctrl_datamem_write_en this will on be enabled for LW instructions
+
+   - an add and Lw instruction would go through ALU control but would have different memory control to determine write rather than read 
 
 ## Putting it all together!
 After implementing each component, we can now simulate the processors. We must provide input data for the processor.
