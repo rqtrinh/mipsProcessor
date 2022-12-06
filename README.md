@@ -4,8 +4,21 @@
 ```
 iverilog -o processsor.vvp Processor_top_tb.v
 ```
+# Names/Contributions
+- Ryan Trinh
+  - Alu_Control.v, Alu_Core.v, Alu_Top.v, Instruction_Memory.v, Program_Counter, Register_File, Sign_Extension.v, Data_Memory.v, Shifter_Branch, Shifter_Jump, Concat_Jump_Addr
+  - Comments on implemented parts
+  - Debugging code
+- Brian Nguyen
+  - Processor_Top.v, Control_Logic.v
+  - Debugging code
+- Deric Kwok
+  - Processor_top_tb.v, Adder.v
+  - Translate MIPS to bytesize data
+  - Compiling and testing code to produce waves
+  - Debugging Code
 
-## General Details
+## Features
 ![mips](https://user-images.githubusercontent.com/76807966/205785724-68438a48-8d04-48df-b1ea-505251b21f59.png)
 
 - We implemented the Zybooks implementation of a single cylce MIPS Processor
